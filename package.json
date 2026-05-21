@@ -1,10 +1,11 @@
 {
-  "name": "dotnet-fast-debug",
-  "displayName": ".NET Fast Debug - C# minimalist Debugger",
+  "name": "net-fast-debug",
+  "displayName": ".NET Fast Debug - C# minimalist Debugger.",
   "description": "Debug C# projects from a *.csproj file of .NET 6.0 or later, with a minimalist approach.",
   "version": "1.0.0",
   "publisher": "BrianAthayde",
   "license": "MIT",
+  "icon": "images/net-fast-debug-icon.png",
   "repository": {
     "type": "git",
     "url": "https://github.com/brianathayde/net-fast-debug.git"
