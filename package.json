@@ -1,0 +1,88 @@
+{
+  "name": "dotnet-fast-debug",
+  "displayName": ".NET Fast Debug - C# minimalist Debugger",
+  "description": "Debug C# projects from a *.csproj file of .NET 6.0 or later, with a minimalist approach.",
+  "version": "1.0.0",
+  "publisher": "BrianAthayde",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "extensionDependencies": [
+    "ms-dotnettools.csharp"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "configuration": {
+      "title": ".NET Fast Debug",
+      "properties": {
+        "dotnetFastDebug.windowsConsole": {
+          "type": "string",
+          "enum": [
+            "internalConsole",
+            "integratedTerminal",
+            "externalTerminal"
+          ],
+          "default": "integratedTerminal",
+          "description": "Which console the extension should use for debug sessions on Windows."
+        },
+        "dotnetFastDebug.unixConsole": {
+          "type": "string",
+          "enum": [
+            "internalConsole",
+            "integratedTerminal",
+            "externalTerminal"
+          ],
+          "default": "integratedTerminal",
+          "description": "Which console the extension should use for debug sessions on macOS and Linux."
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "dotnet-fast-debug.debugInNewTerminal",
+        "title": "Debug in New Terminal"
+      }
+    ],
+    "submenus": [
+      {
+        "id": "dotnet-fast-debug.fastDotnetDebug",
+        "label": ".NET Fast Debug"
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "submenu": "dotnet-fast-debug.fastDotnetDebug",
+          "when": "resourceExtname == .csproj",
+          "group": "navigation"
+        }
+      ],
+      "dotnet-fast-debug.fastDotnetDebug": [
+        {
+          "command": "dotnet-fast-debug.debugInNewTerminal",
+          "when": "resourceExtname == .csproj",
+          "group": "navigation"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "lint": "eslint src --ext ts",
+    "test": "npm run compile"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.90.0",
+    "@types/node": "20.x",
+    "typescript": "^5.4.5",
+    "eslint": "^8.57.0",
+    "@typescript-eslint/eslint-plugin": "^7.11.0",
+    "@typescript-eslint/parser": "^7.11.0"
+  }
+}
