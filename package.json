@@ -4,12 +4,35 @@
   "description": "Debug C# projects from a *.csproj file of .NET 6.0 or later, with a minimalist approach.",
   "version": "1.0.0",
   "publisher": "BrianAthayde",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/brianathayde/net-fast-debug.git"
+  },
+  "bugs": {
+    "url": "https://github.com/brianathayde/net-fast-debug/issues"
+  },
+  "homepage": "https://github.com/brianathayde/net-fast-debug#readme",
   "engines": {
     "vscode": "^1.90.0"
   },
   "categories": [
+    "Debuggers",
     "Other"
   ],
+  "keywords": [
+    "dotnet",
+    ".net",
+    "csharp",
+    "c#",
+    "debug",
+    "debugger",
+    "csproj"
+  ],
+  "galleryBanner": {
+    "color": "#1f2937",
+    "theme": "dark"
+  },
   "extensionDependencies": [
     "ms-dotnettools.csharp"
   ],
@@ -71,18 +94,22 @@
     }
   },
   "scripts": {
-    "vscode:prepublish": "npm run compile",
+    "clean": "node -e \"require('fs').rmSync('out', { recursive: true, force: true })\"",
+    "vscode:prepublish": "npm run clean && npm run compile",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
     "lint": "eslint src --ext ts",
-    "test": "npm run compile"
+    "test": "npm run compile",
+    "package": "vsce package",
+    "publish:marketplace": "vsce publish"
   },
   "devDependencies": {
-    "@types/vscode": "^1.90.0",
     "@types/node": "20.x",
-    "typescript": "^5.4.5",
-    "eslint": "^8.57.0",
+    "@types/vscode": "1.90.0",
     "@typescript-eslint/eslint-plugin": "^7.11.0",
-    "@typescript-eslint/parser": "^7.11.0"
+    "@typescript-eslint/parser": "^7.11.0",
+    "@vscode/vsce": "^3.9.1",
+    "eslint": "^8.57.0",
+    "typescript": "^5.4.5"
   }
 }

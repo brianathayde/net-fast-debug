@@ -43,3 +43,25 @@ Useful scripts:
 - `npm run watch`: recompile automatically during development.
 - `npm run lint`: run ESLint.
 - `npm test`: compile the extension.
+
+## Packaging
+
+Generate a local `.vsix` package:
+
+```bash
+npm run package
+```
+
+Install the generated package manually in VS Code with:
+
+```bash
+code --install-extension dotnet-fast-debug-1.0.0.vsix
+```
+
+Publish to the Visual Studio Marketplace:
+
+```bash
+npm run publish:marketplace
+```
+
+Publishing requires a Marketplace publisher account and a Personal Access Token configured for `vsce`.
