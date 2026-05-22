@@ -69,6 +69,14 @@
       {
         "command": "dotnet-fast-debug.debugInNewTerminal",
         "title": "Debug in New Terminal"
+      },
+      {
+        "command": "dotnet-fast-debug.noRestoreDebugInNewTerminal",
+        "title": "No Restore - Debug in Integrated Terminal"
+      },
+      {
+        "command": "dotnet-fast-debug.noRestoreNoDependenciesDebugInNewTerminal",
+        "title": "No Restore + No Dependencies - Debug in Integrated Terminal"
       }
     ],
     "submenus": [
@@ -88,6 +96,16 @@
       "dotnet-fast-debug.fastDotnetDebug": [
         {
           "command": "dotnet-fast-debug.debugInNewTerminal",
+          "when": "resourceExtname == .csproj",
+          "group": "navigation"
+        },
+        {
+          "command": "dotnet-fast-debug.noRestoreDebugInNewTerminal",
+          "when": "resourceExtname == .csproj",
+          "group": "navigation"
+        },
+        {
+          "command": "dotnet-fast-debug.noRestoreNoDependenciesDebugInNewTerminal",
           "when": "resourceExtname == .csproj",
           "group": "navigation"
         }

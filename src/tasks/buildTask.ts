@@ -8,17 +8,23 @@ type TasksJson = {
   tasks?: Array<Record<string, unknown>>;
 };
 
+type BuildTaskOptions = {
+  noRestore?: boolean;
+  noDependencies?: boolean;
+};
+
 export async function ensureBuildTask(
   csprojUri: vscode.Uri,
   projectName: string,
   projectDir: string,
-  csprojPath: string
+  csprojPath: string,
+  options: BuildTaskOptions = {}
 ) {
   const workspaceFolder = vscode.workspace.getWorkspaceFolder(csprojUri);
   const vscodeDir = path.join(workspaceFolder?.uri.fsPath ?? projectDir, '.vscode');
   const tasksPath = path.join(vscodeDir, 'tasks.json');
-  const label = `dotnet-debug-terminal: build ${projectName}`;
-  const task = createBuildTask(label, projectDir, csprojPath);
+  const label = createTaskLabel(projectName, options);
+  const task = createBuildTask(label, projectDir, csprojPath, options);
 
   await fs.mkdir(vscodeDir, { recursive: true });
 
@@ -33,12 +39,27 @@ export async function ensureBuildTask(
   return label;
 }
 
-function createBuildTask(label: string, projectDir: string, csprojPath: string) {
+function createBuildTask(
+  label: string,
+  projectDir: string,
+  csprojPath: string,
+  options: BuildTaskOptions
+) {
+  const args = ['build', csprojPath, '--configuration', 'Debug', '--nologo'];
+
+  if (options.noRestore) {
+    args.push('--no-restore', '-clp:ErrorsOnly');
+  }
+
+  if (options.noDependencies) {
+    args.push('--no-dependencies');
+  }
+
   return {
     label,
     type: 'process',
     command: 'dotnet',
-    args: ['build', csprojPath, '--configuration', 'Debug', '--nologo'],
+    args,
     options: {
       cwd: projectDir
     },
@@ -73,4 +94,16 @@ function upsertTask(tasks: Array<Record<string, unknown>>, task: Record<string, 
   }
 
   tasks.push(task);
+}
+
+function createTaskLabel(projectName: string, options: BuildTaskOptions) {
+  if (options.noRestore && options.noDependencies) {
+    return `dotnet-debug-terminal: build --no-restore --no-dependencies ${projectName}`;
+  }
+
+  if (options.noRestore) {
+    return `dotnet-debug-terminal: build --no-restore ${projectName}`;
+  }
+
+  return `dotnet-debug-terminal: build ${projectName}`;
 }

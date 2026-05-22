@@ -2,11 +2,13 @@
 
 A minimal VS Code extension for starting and debugging .NET projects directly from a `.csproj` file.
 
-Right-click a `.csproj` file and select `.NET Fast Debug` > `Debug in New Terminal`.
+Right-click a `.csproj` file and select `.NET Fast Debug` > `Debug in New Terminal`, `No Restore - Debug in Integrated Terminal`, or `No Restore + No Dependencies - Debug in Integrated Terminal`.
 
 ## Features
 
 - Builds the selected project in `Debug` configuration.
+- Includes an optional no-restore debug command for faster restarts when dependencies are already restored.
+- Includes an optional no-restore plus no-dependencies debug command for the fastest restart path when referenced projects have not changed.
 - Finds the generated `.dll` under `bin/Debug`.
 - Starts the application with the VS Code `coreclr` debugger.
 - Uses the integrated terminal as the application console.
@@ -37,8 +39,10 @@ You also need the .NET SDK available in your terminal path.
 
 1. Open a workspace that contains a .NET project.
 2. Right-click a `.csproj` file in the Explorer.
-3. Select `.NET Fast Debug` > `Debug in New Terminal`.
-4. Use the debug toolbar reload button to restart the session with a fresh build when needed.
+3. Select `.NET Fast Debug` > `Debug in New Terminal` for the regular flow.
+4. Select `.NET Fast Debug` > `No Restore - Debug in Integrated Terminal` when you want the pre-launch build to skip restore and reduce restart time.
+5. Select `.NET Fast Debug` > `No Restore + No Dependencies - Debug in Integrated Terminal` when you also want to skip rebuilding project references that have not changed.
+6. Use the debug toolbar reload button to restart the session with the same pre-launch task that was generated for that command.
 
 ## Development
 
