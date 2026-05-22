@@ -13,6 +13,20 @@ Right-click a `.csproj` file and select `.NET Fast Debug` > `Debug in New Termin
 - Creates or updates a `.vscode/tasks.json` build task.
 - Uses that task as `preLaunchTask`, so restarting the debugger rebuilds the project first.
 
+## Demo
+
+### Start debugging from the `.csproj`
+
+Use the Explorer context menu to launch the selected project without manually creating a `launch.json` entry.
+
+![Demo showing how to start debugging from a .csproj file](./images/net-fast-debug-demo-01.gif)
+
+### Reload debug and rebuild automatically
+
+The green reload button in the VS Code debug toolbar works with the generated `preLaunchTask`, so restarting the session rebuilds the project before attaching again.
+
+![Demo showing the debug reload button rebuilding and restarting the application](./images/net-fast-debug-demo-02.gif)
+
 ## Requirements
 
 This extension depends on the official C# extension (`ms-dotnettools.csharp`), which provides the `coreclr` debugger.
@@ -24,6 +38,7 @@ You also need the .NET SDK available in your terminal path.
 1. Open a workspace that contains a .NET project.
 2. Right-click a `.csproj` file in the Explorer.
 3. Select `.NET Fast Debug` > `Debug in New Terminal`.
+4. Use the debug toolbar reload button to restart the session with a fresh build when needed.
 
 ## Development
 
