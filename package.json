@@ -2,7 +2,7 @@
   "name": "net-fast-debug",
   "displayName": ".NET Fast Debug - C# minimalist Debugger.",
   "description": "Debug C# projects from a *.csproj file of .NET 6.0 or later, with a minimalist approach.",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "publisher": "BrianAthayde",
   "license": "MIT",
   "icon": "images/net-fast-debug-icon.png",
